@@ -17,7 +17,7 @@ class Listing(models.Model):
     bedrooms = models.IntegerField()
     bathrooms = models.DecimalField(max_digits=2, decimal_places=1)
     clubhouse = models.BooleanField(default=False)
-    sqrt = models.DecimalField(max_digits=5, decimal_places=2)
+    sqrt = models.DecimalField(max_digits=7, decimal_places=1)
     estate_size = models.FloatField(default=0.0)
     photo_main = models.ImageField(upload_to='photos/%Y/%m/%d/')
     photo_1 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
