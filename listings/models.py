@@ -15,7 +15,7 @@ class Listing(models.Model):
     street = models.CharField(max_length=200)
     district = models.CharField(max_length=100)
     bedrooms = models.IntegerField()
-    bathrooms = models.DecimalField(max_digits=2, decimal_places=1)
+    bathrooms = models.IntegerField()
     clubhouse = models.BooleanField(default=False)
     sqrt = models.DecimalField(max_digits=7, decimal_places=1)
     estate_size = models.FloatField(default=0.0)
