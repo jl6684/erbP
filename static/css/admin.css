@@ -1,0 +1,136 @@
+#header {
+    height: 50px;
+    background: #132C54;
+    color: #fff;
+}
+
+/* Header branding and logo */
+#header .branding {
+    float: left;
+    padding: 10px 20px;
+}
+
+#header .branding h1 {
+    margin: 0;
+    font-size: 18px;
+    color: #fff;
+}
+
+/* User tools in header */
+#header #user-tools {
+    float: right;
+    padding: 15px 20px;
+}
+
+#header #user-tools a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+#header #user-tools a:hover {
+    text-decoration: underline;
+}
+
+/* Navigation bar */
+.module h2, .module caption, .inline-group h2 {
+    background: #132C54;
+    color: #fff;
+}
+
+/* Buttons */
+.button, input[type=submit], input[type=button], .submit-row input, a.button {
+    background: #132C54;
+    border: 1px solid #0f1f3d;
+    color: #fff;
+}
+
+.button:hover, input[type=submit]:hover, input[type=button]:hover, .submit-row input:hover, a.button:hover {
+    background: #0f1f3d;
+}
+
+/* Default button (primary action) */
+.default, input[type=submit].default, .submit-row input.default {
+    background: #132C54;
+    border-color: #132C54;
+}
+
+.default:hover, input[type=submit].default:hover, .submit-row input.default:hover {
+    background: #0f1f3d;
+}
+
+/* Sidebar navigation */
+.module {
+    border: 1px solid #374151;
+    margin-bottom: 20px;
+}
+
+/* Links */
+.module th a:link, .module th a:visited {
+    color: #fff;
+}
+
+/* Action bar */
+.actions {
+    background: #132C54;
+    border-top: 1px solid #374151;
+    padding: 10px;
+}
+
+/* Table styling */
+.results table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.results th {
+    background: #132C54;
+    border-bottom: 2px solid #132C54;
+    padding: 10px;
+    color: #fff;
+}
+
+/* Form styling */
+.form-row {
+    padding: 10px 0;
+    border-bottom: 1px solid #374151;
+}
+
+/* Admin branding customization */
+.admin-branding {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brand-img {
+    vertical-align: middle;
+}
+
+/* Custom colors for different sections */
+.deletelink {
+    background: #dc2626 !important;
+    border-color: #dc2626 !important;
+}
+
+.deletelink:hover {
+    background: #b91c1c !important;
+}
+
+/* Error messages */
+.errorlist {
+    background: #fecaca;
+    border: 1px solid #fca5a5;
+    color: #991b1b;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+/* Success messages */
+.success {
+    background: #bbf7d0;
+    border: 1px solid #86efac;
+    color: #065f46;
+    padding: 10px;
+    border-radius: 4px;
+}

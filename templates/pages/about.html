@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-   <section id="showcase-inner" class="py-5 text-white">
+    <section id="showcase-inner" class="py-5 text-white">
       <div class="container">
         <div class="row text-center">
           <div class="col-md-12">
@@ -21,7 +21,7 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href={% url "pages:index" %}> <i class="fas fa-home"></i> Home</a> //
+              <a href="{% url 'pages:index' %}"> <i class="fas fa-home"></i> Home</a>
             </li>
             <li class="breadcrumb-item active">About</li>
           </ol>
@@ -38,7 +38,7 @@
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt,
               pariatur!
             </p>
-            <img src={% static "img/about.jpg" %} alt="" /> //
+            <img src="{% static 'img/about.jpg' %}" alt="" />
             <p class="mt-4">
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
               Perspiciatis esse officia repudiandae ad saepe ex, amet neque quod
@@ -48,21 +48,29 @@
             </p>
           </div>
           <div class="col-md-4">
+            {% if mvp_realtor %}
             <div class="card">
               <img
                 class="card-img-top"
-                src="assets/img/realtors/kyle.jpg" //
+                src="{{ mvp_realtor.photo.url }}"
                 alt="Seller of the month"
               />
               <div class="card-body">
                 <h5 class="card-title">Seller Of The Month</h5>
-                <h6 class="text-secondary">Kyle chan</h6>
+                <h6 class="text-secondary">{{ mvp_realtor.name }}</h6>
                 <p class="card-text">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis
-                  nesciunt amet, illo itaque similique repellat. content.
+                  {{ mvp_realtor.description|default:"Top performing realtor of the month. Dedicated to helping you find your perfect home." }}
                 </p>
               </div>
             </div>
+            {% else %}
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Seller Of The Month</h5>
+                <p class="card-text">No MVP realtor selected this month.</p>
+              </div>
+            </div>
+            {% endif %}
           </div>
         </div>
       </div>
@@ -76,9 +84,8 @@
         aperiam, unde aliquid at similique!
       </h4>
       <hr />
-      <a href="listings.html" class="btn btn-secondary text-white btn-lg" //
-        >View Our Featured Listings</a
-      >
+      <a href="{% url 'listings:listings' %}" class="btn btn-secondary text-white btn-lg"
+        >View Our Featured Listings</a>
     </section>
 
     <!-- Team -->
@@ -86,46 +93,32 @@
       <div class="container">
         <h2 class="text-center">Our Team</h2>
         <div class="row text-center">
-          <div class="col-md-4">
-            <img
-              src="assets/img/realtors/kyle.jpg" //
-              alt=""
-              class="rounded-circle mb-3"
-            />
-            <h4>Kyle Chan</h4>
-            <p class="text-success">
-              <i class="fas fa-award text-success mb-3"></i> Realtor
-            </p>
-            <hr />
-            <p><i class="fas fa-phone"></i> (852)-555-5555</p>
-            <p><i class="fas fa-envelope-open"></i> kyle@bcrealestate.co</p>
-          </div>
-
-          <div class="col-md-4">
-            <img
-              src="assets/img/realtors/mark.jpg" //
-              alt=""
-              class="rounded-circle mb-3"
-            />
-            <h4>Mark Lee</h4>
-            <p class="text-success">Realtor</p>
-            <hr />
-            <p><i class="fas fa-phone"></i> (852)-444-4444</p>
-            <p><i class="fas fa-envelope-open"></i> mark@bcrealestate.co</p>
-          </div>
-
-          <div class="col-md-4">
-            <img
-              src="assets/img/realtors/jenny.jpg" //
-              alt=""
-              class="rounded-circle mb-3"
-            />
-            <h4>Jenny Cheung</h4>
-            <p class="text-success">Realtor</p>
-            <hr />
-            <p><i class="fas fa-phone"></i> (852)-333-3333</p>
-            <p><i class="fas fa-envelope-open"></i> jenny@bcrealestate.co</p>
-          </div>
+          {% if realtors %}
+            {% for realtor in realtors %}
+            <div class="col-md-4 mb-4">
+              <img
+                src="{{ realtor.photo.url }}"
+                alt="{{ realtor.name }}"
+                class="rounded-circle mb-3"
+                style="width: 200px; height: 200px; object-fit: cover;"
+              />
+              <h4>{{ realtor.name }}</h4>
+              <p class="text-success">
+                <i class="fas fa-award text-success mb-3"></i> MVP Realtor
+              </p>
+              <hr />
+              <p><i class="fas fa-phone"></i> {{ realtor.phone }}</p>
+              <p><i class="fas fa-envelope-open"></i> {{ realtor.email }}</p>
+              {% if realtor.description %}
+                <p class="text-muted">{{ realtor.description|truncatewords:15 }}</p>
+              {% endif %}
+            </div>
+            {% endfor %}
+          {% else %}
+            <div class="col-md-12">
+              <p>No MVP realtors to display at the moment.</p>
+            </div>
+          {% endif %}
         </div>
       </div>
     </section>

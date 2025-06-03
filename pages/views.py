@@ -12,7 +12,17 @@ def index(request):
     return render(request, 'pages/index.html', context)
 
 def about(request):
-    return render(request, 'pages/about.html')
+    # Get all MVP realtors ordered by hire date
+    realtors = Realtor.objects.order_by('-hire_date').filter(is_mvp=True)
+    
+    # Get the first MVP realtor for "Seller of the Month"
+    mvp_realtor = realtors.first() if realtors.exists() else None
+    
+    context = {
+        'realtors': realtors,
+        'mvp_realtor': mvp_realtor,
+    }
+    return render(request, 'pages/about.html', context)
 
 # def base(request):
 #     return render(request, 'base.html')
