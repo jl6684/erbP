@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
 {% load humanize %}
+{% block title %} | Welcome
+
+{% endblock title %}
 {% block content %}
    <!-- Showcase -->
     <section id="showcase">
@@ -14,7 +17,7 @@
               tempore! Consectetur, id commodi!
             </p>
             <div class="search">
-              <form action="{% url 'listings:search' %}"> //
+              <form action="{% url 'listings:search' %}"> 
                 <!-- Form Row 1 -->
                 <div class="form-row">
                   <div class="col-md-4 mb-3">
@@ -28,39 +31,22 @@
                   </div>
 
                   <div class="col-md-4 mb-3">
-                    <label class="sr-only">street</label>
+                    <label class="sr-only">Title</label>
                     <input
                       type="text"
-                      name="street"
+                      name="title"
                       class="form-control"
-                      placeholder="Street"
+                      placeholder="Title (e.g. Luxury Villa, Modern Apartment, etc)"
                     />
                   </div>
 
                   <div class="col-md-4 mb-3">
                     <label class="sr-only">District</label>
                     <select name="district" class="form-control">
-                      <option selected="true" disabled="disabled">
-                        District (All)
-                      </option>
-                      <option value="IL">Islands</option>
-                      <option value="KT">Kwai Tsing</option>
-                      <option value="NR">North</option>
-                      <option value="SK">Sai Kung</option>
-                      <option value="ST">Sha Tin</option>
-                      <option value="TP">Tai Po</option>
-                      <option value="TW">Tsuen Wan</option>
-                      <option value="TM">Tuen Mun</option>
-                      <option value="YL">Yuen Long</option>
-                      <option value="KC">Kowloon City</option>
-                      <option value="KW">Kwun Tong</option>
-                      <option value="SS">Sham Shui Po</option>
-                      <option value="WT">Wong Tai Sin</option>
-                      <option value="YM">Yau Tsim Mong</option>
-                      <option value="CW">Central & Western</option>
-                      <option value="ER">Eastern</option>
-                      <option value="SR">Southern</option>
-                      <option value="WC">Wan Chai</option>
+                      <option value="">All Districts</option>
+                      {% for key, value in district_choices %}
+                        <option value="{{ key }}">{{ value }}</option>
+                      {% endfor %}
                     </select>
                   </div>
                 </div>
@@ -69,36 +55,18 @@
                   <div class="col-md-6 mb-3">
                     <label class="sr-only">Bedrooms</label>
                     <select name="bedrooms" class="form-control">
-                      <option selected="true" disabled="disabled">
-                        Bedrooms (All)
-                      </option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
-                      <option value="7">7</option>
-                      <option value="8">8</option>
-                      <option value="9">9</option>
-                      <option value="10">10</option>
+                      <option value="">Bedrooms (Any)</option>
+                      {% for key, value in bedroom_choices %}
+                        <option value="{{ key }}">{{ value }}</option>
+                      {% endfor %}
                     </select>
                   </div>
                   <div class="col-md-6 mb-3">
                     <select name="price" class="form-control" id="type">
-                      <option selected="true" disabled="disabled">
-                        Max Price (Any)
-                      </option>
-                      <option value="1000000">$1,000,000</option>
-                      <option value="2000000">$2,000,000</option>
-                      <option value="3000000">$3,000,000</option>
-                      <option value="4000000">$4,000,000</option>
-                      <option value="5000000">$5,000,000</option>
-                      <option value="6000000">$6,000,000</option>
-                      <option value="7000000">$7,000,000</option>
-                      <option value="8000000">$8,000,000</option>
-                      <option value="9000000">$9,000,000</option>
-                      <option value="10000000">$10M+</option>
+                      <option value="">Max Price (Any)</option>
+                      {% for key, value in price_choices %}
+                        <option value="{{ key }}">{{ value }}</option>
+                      {% endfor %}
                     </select>
                   </div>
                 </div>

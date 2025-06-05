@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+
+{% block title %}| Browse Properties{% endblock %}
+
 {% load humanize %}
 {% block content %}
 
@@ -32,39 +35,48 @@
     <!-- Search -->
     <section id="search" class="py-4 mb-4 bg-light">
       <div class="container">
-        <form method="GET" action="{% url 'listings:listings' %}">
-          <div class="row">
+        <form method="GET" action="{% url 'listings:search' %}">
+          <!-- Form Row 1 -->
+          <div class="form-row">
             <div class="col-md-4 mb-3">
               <label class="sr-only">Keywords</label>
               <input type="text" name="keywords" class="form-control" placeholder="Keyword (Pool, Gym, etc)" value="{{ request.GET.keywords }}">
             </div>
             <div class="col-md-4 mb-3">
+              <label class="sr-only">Title</label>
+              <input type="text" name="title" class="form-control" placeholder="Title" value="{{ request.GET.title }}">
+            </div>
+            <div class="col-md-4 mb-3">
               <label class="sr-only">District</label>
               <select name="district" class="form-control">
                 <option value="">All Districts</option>
-                {% for key, value in district_choices.items %}
+                {% for key, value in district_choices %}
                   <option value="{{ key }}" {% if key == request.GET.district %}selected{% endif %}>{{ value }}</option>
                 {% endfor %}
               </select>
             </div>
+          </div>
+          <!-- Form Row 2 -->
+          <div class="form-row">
             <div class="col-md-4 mb-3">
               <label class="sr-only">Bedrooms</label>
               <select name="bedrooms" class="form-control">
                 <option value="">Bedrooms (Any)</option>
-                {% for key, value in bedroom_choices.items %}
+                {% for key, value in bedroom_choices %}
                   <option value="{{ key }}" {% if key == request.GET.bedrooms %}selected{% endif %}>{{ value }}</option>
                 {% endfor %}
               </select>
             </div>
             <div class="col-md-4 mb-3">
+              <label class="sr-only">Price</label>
               <select name="price" class="form-control">
                 <option value="">Max Price (Any)</option>
-                {% for key, value in price_choices.items %}
+                {% for key, value in price_choices %}
                   <option value="{{ key }}" {% if key == request.GET.price %}selected{% endif %}>{{ value }}</option>
                 {% endfor %}
               </select>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-4">
               <button class="btn btn-secondary btn-block mt-4" type="submit">Submit form</button>
             </div>
           </div>
@@ -153,7 +165,7 @@
             <!-- Previous Page Link -->
             {% if listings.has_previous %}
             <li class="page-item">
-              <a class="page-link" href="?page={{ listings.previous_page_number }}{% if request.GET.keywords %}&keywords={{ request.GET.keywords }}{% endif %}{% if request.GET.district %}&district={{ request.GET.district }}{% endif %}{% if request.GET.bedrooms %}&bedrooms={{ request.GET.bedrooms }}{% endif %}{% if request.GET.price %}&price={{ request.GET.price }}{% endif %}">&laquo;</a>
+              <a class="page-link" href="?page={{ listings.previous_page_number }}{% if request.GET.keywords %}&keywords={{ request.GET.keywords }}{% endif %}{% if request.GET.title %}&title={{ request.GET.title }}{% endif %}{% if request.GET.district %}&district={{ request.GET.district }}{% endif %}{% if request.GET.bedrooms %}&bedrooms={{ request.GET.bedrooms }}{% endif %}{% if request.GET.price %}&price={{ request.GET.price }}{% endif %}">&laquo;</a>
             </li>
             {% else %}
             <li class="page-item disabled">
@@ -169,7 +181,7 @@
               </li>
               {% elif num > listings.number|add:'-3' and num < listings.number|add:'3' %}
               <li class="page-item">
-                <a class="page-link" href="?page={{ num }}{% if request.GET.keywords %}&keywords={{ request.GET.keywords }}{% endif %}{% if request.GET.district %}&district={{ request.GET.district }}{% endif %}{% if request.GET.bedrooms %}&bedrooms={{ request.GET.bedrooms }}{% endif %}{% if request.GET.price %}&price={{ request.GET.price }}{% endif %}">{{ num }}</a>
+                <a class="page-link" href="?page={{ num }}{% if request.GET.keywords %}&keywords={{ request.GET.keywords }}{% endif %}{% if request.GET.title %}&title={{ request.GET.title }}{% endif %}{% if request.GET.district %}&district={{ request.GET.district }}{% endif %}{% if request.GET.bedrooms %}&bedrooms={{ request.GET.bedrooms }}{% endif %}{% if request.GET.price %}&price={{ request.GET.price }}{% endif %}">{{ num }}</a>
               </li>
               {% endif %}
             {% endfor %}
@@ -177,7 +189,7 @@
             <!-- Next Page Link -->
             {% if listings.has_next %}
             <li class="page-item">
-              <a class="page-link" href="?page={{ listings.next_page_number }}{% if request.GET.keywords %}&keywords={{ request.GET.keywords }}{% endif %}{% if request.GET.district %}&district={{ request.GET.district }}{% endif %}{% if request.GET.bedrooms %}&bedrooms={{ request.GET.bedrooms }}{% endif %}{% if request.GET.price %}&price={{ request.GET.price }}{% endif %}">&raquo;</a>
+              <a class="page-link" href="?page={{ listings.next_page_number }}{% if request.GET.keywords %}&keywords={{ request.GET.keywords }}{% endif %}{% if request.GET.title %}&title={{ request.GET.title }}{% endif %}{% if request.GET.district %}&district={{ request.GET.district }}{% endif %}{% if request.GET.bedrooms %}&bedrooms={{ request.GET.bedrooms }}{% endif %}{% if request.GET.price %}&price={{ request.GET.price }}{% endif %}">&raquo;</a>
             </li>
             {% else %}
             <li class="page-item disabled">

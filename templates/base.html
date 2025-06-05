@@ -14,12 +14,15 @@
     <link rel="stylesheet" href={% static "css/style.css" %} />
     <!-- Lightbox -->
     <link rel="stylesheet" href={% static "css/lightbox.min.css" %} />
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static "img/favicon.ico" %}" type="image/favicon.icon" />
 
-    <title>BC Real Estate</title>
+    <title>BC Real Estate {% block title %}{% endblock %}{% if user.is_authenticated %} - {{ user.first_name|default:user.username }}{% endif %}</title>
   </head>
   <body>
     {% include "partials/_topbar.html" %}
     {% include "partials/_navbar.html" %}
+    {% include "partials/_alert.html" %}
     {% block content %}{% endblock %}
     {% include "partials/_footer.html" %}
     <script src={% static "js/jquery-3.3.1.min.js" %} ></script>
