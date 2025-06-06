@@ -106,9 +106,15 @@
                 style="width: 200px; height: 200px; object-fit: cover;"
               />
               <h4>{{ realtor.name }}</h4>
-              <p class="text-success">
-                <i class="fas fa-award text-success mb-3"></i> MVP Realtor
-              </p>
+              {% if realtor.is_mvp %}
+                <p class="text-success">
+                  <i class="fas fa-award text-success mb-3"></i> MVP Realtor
+                </p>
+              {% else %}
+                <p class="text-primary">
+                  <i class="fas fa-user-tie text-primary mb-3"></i> Team Member
+                </p>
+              {% endif %}
               <hr />
               <p><i class="fas fa-phone"></i> {{ realtor.phone }}</p>
               <p><i class="fas fa-envelope-open"></i> {{ realtor.email }}</p>
@@ -119,7 +125,7 @@
             {% endfor %}
           {% else %}
             <div class="col-md-12">
-              <p>No MVP realtors to display at the moment.</p>
+              <p>No team members to display at the moment.</p>
             </div>
           {% endif %}
         </div>

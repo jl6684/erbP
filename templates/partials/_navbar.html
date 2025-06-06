@@ -29,13 +29,22 @@
 
             <ul class="navbar-nav ml-auto">
             {% if user.is_authenticated %}
-              <li class="nav-item {% if 'dashboard' in request.path %}active{% endif %} mr-3">
-              <a class="nav-link" href="{% url 'accounts:dashboard' %}">Welcome, {{user.username}} &nbsp;&nbsp;
-                <i class="fas fa-tachometer-alt"></i> Dashboard</a>
-              </li>
-              <li class="nav-item mr-3">
-              <a class="nav-link" href="{% url 'accounts:logout' %}">
-                <i class="fas fa-sign-out-alt"></i> Logout</a>
+              <li class="nav-item dropdown mr-3">
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Welcome, {{user.username}}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="userDropdown">
+                  <a class="dropdown-item" href="{% url 'accounts:dashboard' %}">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                  </a>
+                  <a class="dropdown-item" href="{% url 'accounts:profile' %}">
+                    <i class="fas fa-user-edit"></i> Edit Profile
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{% url 'accounts:logout' %}">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                  </a>
+                </div>
               </li>
             {% else %}
               <li class="nav-item {% if 'register' in request.path %}active{% endif %} mr-3">

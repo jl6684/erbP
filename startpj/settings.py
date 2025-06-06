@@ -149,8 +149,24 @@ INTERNAL_IPS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+# Email Settings
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # For development
+# For production, use SMTP:
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_TIMEOUT = 60  # Timeout in seconds
+EMAIL_USE_LOCALTIME = False
+
+# Default 'from' email
+DEFAULT_FROM_EMAIL = 'BC Real Estate <noreply@bcrealestate.com>'
+ADMIN_EMAIL = 'admin@bcrealestate.com'
+
 MESSAGES_TAGS = {
     messages.ERROR: 'danger',
     messages.SUCCESS: 'success',
-  
 }

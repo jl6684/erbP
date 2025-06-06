@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def register(request):
@@ -69,3 +70,27 @@ def dashboard(request):
         return render(request, 'accounts/dashboard.html', context)
     else:
         return redirect('accounts:login')
+
+@login_required
+def profile(request):
+    if request.method == 'POST':
+        user = request.user
+        first_name = request.POST.get('first_name', '')
+        last_name = request.POST.get('last_name', '')
+        email = request.POST.get('email', '')
+        
+        # Check if email is already taken by another user
+        if User.objects.filter(email=email).exclude(id=user.id).exists():
+            messages.error(request, 'This email is already taken by another user')
+            return redirect('accounts:profile')
+        
+        # Update user information
+        user.first_name = first_name
+        user.last_name = last_name
+        user.email = email
+        user.save()
+        
+        messages.success(request, 'Your profile has been updated successfully!')
+        return redirect('accounts:profile')
+    
+    return render(request, 'accounts/profile.html')

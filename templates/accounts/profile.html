@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}| Profile{% endblock %}
+
+{% block content %}
+  <section id="showcase-inner" class="py-5 text-white">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h1 class="display-4">User Profile</h1>
+          <p class="lead">Update your account information</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <section id="bc" class="mt-3">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'pages:index' %}"><i class="fas fa-home"></i> Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="{% url 'accounts:dashboard' %}">Dashboard</a>
+          </li>
+          <li class="breadcrumb-item active">Profile</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <section id="profile" class="py-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <div class="card">
+            <div class="card-header bg-primary text-white">
+              <h4><i class="fas fa-user"></i> Edit Profile</h4>
+            </div>
+            <div class="card-body">
+              <form action="{% url 'accounts:profile' %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                  <label for="first_name">First Name</label>
+                  <input
+                    type="text"
+                    name="first_name"
+                    class="form-control"
+                    value="{{ user.first_name }}"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="last_name">Last Name</label>
+                  <input
+                    type="text"
+                    name="last_name"
+                    class="form-control"
+                    value="{{ user.last_name }}"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input
+                    type="email"
+                    name="email"
+                    class="form-control"
+                    value="{{ user.email }}"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="username">Username</label>
+                  <input
+                    type="text"
+                    name="username"
+                    class="form-control"
+                    value="{{ user.username }}"
+                    disabled
+                  />
+                  <small class="form-text text-muted">Username cannot be changed</small>
+                </div>
+                <input
+                  type="submit"
+                  value="Update Profile"
+                  class="btn btn-primary btn-block"
+                />
+              </form>
+            </div>
+          </div>
+          
+          <div class="card mt-4">
+            <div class="card-header bg-secondary text-white">
+              <h4><i class="fas fa-key"></i> Change Password</h4>
+            </div>
+            <div class="card-body">
+              <p>To change your password, please contact the administrator or use the password reset feature.</p>
+              <a href="{% url 'accounts:dashboard' %}" class="btn btn-light">
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

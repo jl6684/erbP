@@ -224,13 +224,12 @@
             <button type="button" class="close" data-dismiss="modal">
               <span>&times;</span>
             </button>
+          </div>
           <div class="modal-body">
             <form action="{% url 'contacts:contact' %}" method="POST">
               {% csrf_token %}
               <div class="form-group">
-                <label for="property_name" class="col-form-label"
-                  >Property:</label
-                >
+                <label for="property_name" class="col-form-label">Property:</label>
                 <input
                   type="text"
                   name="listing"
@@ -256,7 +255,10 @@
               </div>
               <div class="form-group">
                 <label for="name" class="col-form-label">Name:</label>
-                <input type="text" name="name" class="form-control" required />
+                <input type="text" name="name" class="form-control" 
+                       value="{% if user.is_authenticated %}{{ user.first_name }} {{ user.last_name }}{% endif %}" 
+                       onclick="clearFieldOnClick(this)"
+                       required />
               </div>
               <div class="form-group">
                 <label for="email" class="col-form-label">Email:</label>
@@ -264,6 +266,8 @@
                   type="email"
                   name="email"
                   class="form-control"
+                  value="{% if user.is_authenticated %}{{ user.email }}{% endif %}"
+                  onclick="clearFieldOnClick(this)"
                   required
                 />
               </div>
@@ -286,5 +290,15 @@
         </div>
       </div>
     </div>
+
+    <script>
+      function clearFieldOnClick(field) {
+        // Only clear if the field has a pre-filled value and hasn't been cleared before
+        if (field.dataset.cleared !== 'true') {
+          field.value = '';
+          field.dataset.cleared = 'true';
+        }
+      }
+    </script>
 
 {% endblock content %}

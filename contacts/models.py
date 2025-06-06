@@ -6,7 +6,7 @@ from datetime import datetime
 # Create your models here.
 class Contact(models.Model):
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     name = models.CharField(max_length=200)
     email = models.EmailField()
     phone = models.CharField(max_length=100)
